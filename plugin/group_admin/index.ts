@@ -1,4 +1,5 @@
 //插件固有的开头
+import { segment } from 'oicq';
 import {bot} from '../admin'
 import { log, error } from '../admin'
 
@@ -26,6 +27,13 @@ bot.on('notice.group.ban', e=>{
     bot.sendGroupMsg(e.group_id, res)
 })
 
+bot.on("request.group.add", e=>{
+    bot.sendGroupMsg(e.group_id, "机器人已同意" + e.user_id + "的入群申请")
+    bot.setGroupAddRequest(e.flag,true)
+    setTimeout(() => {
+        bot.sendGroupMsg(e.group_id, [segment.at(e.user_id), "欢迎加入本群"])
+    }, 2000);
+})
 /*{
         self_id: 147258369, //登录账号
         time: 1621582964, //时间戳
