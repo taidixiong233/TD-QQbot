@@ -49,3 +49,19 @@ export function ts2time(shijianchuo : number) : string {
     return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 
 }
+
+/**
+ * 
+ * @param str 需要对比的字符串
+ * @param sto 对比的库数组
+ * @returns str是否在sto数组中的布尔值
+ */
+ export function havestring(str : number, sto : number[]) : boolean;
+ export function havestring(str : string, sto : string[]) : boolean;
+ export function havestring(str : string | number, sto : string[] | number[]) : boolean;
+ export function havestring(str : string | number, sto : string[] | number[]) : boolean{
+     for (let i=0;i<=sto.length;i++) {
+         if (str === sto[i]) return true;
+     }
+     return false;
+ }
