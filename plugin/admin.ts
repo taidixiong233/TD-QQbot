@@ -6,3 +6,4 @@ export const error = puterror;
 
 
 require('./sayhello/index')
+require('./group_admin/index')
