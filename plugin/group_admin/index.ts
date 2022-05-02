@@ -22,8 +22,7 @@ bot.on('message.group', e=> {
 
 //监听群员被ban事件
 bot.on('notice.group.ban', e=>{
-    let res :string = `
-群成员` + e.user_id + `被管理员` + e.operator_id + `禁言` + e.duration + `秒\n其他群员要引以为戒哦`
+    let res :string = `群成员` + e.user_id + `被管理员` + e.operator_id + `禁言` + e.duration + `秒\n其他群员要引以为戒哦`
     bot.sendGroupMsg(e.group_id, res)
 })
 
