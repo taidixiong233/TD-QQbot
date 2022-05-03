@@ -40,6 +40,15 @@ bot.on('message.group', e=> {
         e.reply('禁言成功！', true)
         return;
     }
+
+    if (e.message[0].type === 'text' && e.message[0].text === '菜单') {
+        if (!f.havestring(e.group_id, taidixiong233_group_admin.group_id)) return;
+
+        //用户可根据需求更改菜单提示语
+        let res  = '这是基于oicq协议库的开源机器人——TD机器人\n没有菜单，自己摸索着用\n项目开源在https://github.com/taidixiong233/TD-QQbot/'
+        e.reply([segment.at(e.sender.user_id), res])
+        return;
+    }
 })
 
 bot.on('notice.group.ban', e=>{
