@@ -8,7 +8,7 @@ export const config = {
     author : 'taidixiong233',
     version : '1.0',
     website : 'maohaoji.com',
-    start_filename : './sayhello/index.ts'
+    start_filename : './group_admin/index.ts'
 }
 
 setTimeout(() => {
@@ -20,8 +20,16 @@ setTimeout(() => {
 //懒得写注释，自己理解吧awa
 
 import {taidixiong233_group_admin} from '../admin'
+import { isBanWord } from './bin/关键词过滤1.0';
 import * as f from './function'
+
+setTimeout(()=> {
+    bot.sendPrivateMsg(taidixiong233_group_admin.masterId, '机器人登录成功\nat ' + f.ts2time(new Date().getTime()))
+},500)
+
+
 bot.on('message.group', e=> {
+    //指令类
     if (!f.havestring(e.group_id, taidixiong233_group_admin.group_id)) return;
     if (!f.havestring(e.sender.user_id, taidixiong233_group_admin.adminID)) return;
 
@@ -35,18 +43,32 @@ bot.on('message.group', e=> {
         e.reply('禁言成功！', true)
         return;
     }
+
     if (e.message.length > 2 && e.message[1].type === 'at' && e.message[1].qq != 'all' && e.message[0].type === 'text' && e.message[0].text.slice(0,2) === '禁言' ) {
         bot.setGroupBan(e.group_id, e.message[1].qq, 600)
         e.reply('禁言成功！', true)
         return;
     }
 
-    if (e.message[0].type === 'text' && e.message[0].text === '菜单') {
-        if (!f.havestring(e.group_id, taidixiong233_group_admin.group_id)) return;
+})
 
+bot.on('message.group', e=>{
+    //聊天监视
+    if(e.message.length === 1 && e.message[0].type === 'text' && isBanWord(e.message[0].text).type != 'unknown') {
+        bot.deleteMsg(e.message_id)
+        e.reply('检测到违禁词，已过滤')
+    }
+})
+
+bot.on("message", e=> {
+    if(e.message_type === 'discuss') return
+    if(e.message_type === 'group' && !f.havestring(e.group_id, taidixiong233_group_admin.group_id)) return
+
+    if(e.message.length === 1 && e.message[0].type === 'text' && e.message[0].text === '菜单') {
         //用户可根据需求更改菜单提示语
         let res  = '这是基于oicq协议库的开源机器人——TD机器人\n没有菜单，自己摸索着用\n项目开源在https://github.com/taidixiong233/TD-QQbot/'
-        e.reply([segment.at(e.sender.user_id), res])
+        if(e.message_type === 'group') e.reply([segment.at(e.sender.user_id), res]);
+        else e.reply(res)
         return;
     }
 })
@@ -107,6 +129,10 @@ bot.on('notice.group.increase', e=>{
 
 bot.on("request.friend.add", e=>{
     bot.setFriendAddRequest(e.flag, taidixiong233_group_admin.add_friend)
+    setTimeout(() => {
+        if(taidixiong233_group_admin.add_friend) bot.sendPrivateMsg(e.user_id, `我们已经添加了好友哦！`)
+    }, 1000);
+    return;
 })
 
 bot.on("notice.group.decrease", e=> {

@@ -5,7 +5,7 @@ import { putlog, puterror } from "../function"
 export const log = putlog;
 export const error = puterror;
 
-//如需用插件，请在插件导入行前加上//
+//如需禁用插件，请在插件导入行前加上//
 //require('./sayhello/index')
 
 //group_admin
@@ -26,7 +26,7 @@ export const taidixiong233_group_admin : taidixiong233_group_admin_op= {
     //是否允许机器人自动加好友
     add_friend : true,
 
-    masterId : _settings.masterId,
+    masterId : 2870926164,
 
     //设置管理员的名单
     adminID : [_settings.masterId],
