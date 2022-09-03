@@ -49,7 +49,7 @@ export function login_client(client: Client, pwd: string): Promise<Base_res> {
 		}).on('system.login.error', data => {
 			reject(data)
 		}).on('system.login.device', session=>{
-        	console.log('请输入该账号绑定的手机号收到的验证码后回车继续：')
+        	console.log(config.language.new_device_smscode)
         	client.sendSmsCode()
         	process.stdin.once("data",(data)=>{
             	client.submitSmsCode(data.toString())
