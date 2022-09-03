@@ -11,7 +11,7 @@ export const msg_word_EN_US : Msg_word = {
     not_found_config : 'Please set user id and password in file "config.ts" when first use',
     logining : 'logging...',
     login_success_load_plugin : 'login success, loading plugin now...',
-    new_device_smscode : 'Please input SMS verification code that bound phone and press enter'
+    new_device_smscode : 'Please input SMS verification code that bound phone and press Enter to continue'
 }
 
 
