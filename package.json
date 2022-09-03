@@ -4,8 +4,7 @@
   "description": "基于QICQ协议的QQ机器人框架",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
-    "test": "ts-node index.ts"
+    "start": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
