@@ -1,6 +1,6 @@
 {
   "name": "td-qqbot",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "基于QICQ协议的QQ机器人框架",
   "main": "index.ts",
   "scripts": {
@@ -18,9 +18,11 @@
   "homepage": "https://github.com/taidixiong233/TD-QQbot#readme",
   "dependencies": {
     "fs": "^0.0.1-security",
+    "node-schedule": "^2.1.0",
     "oicq": "^2.2.2"
   },
   "devDependencies": {
-    "@types/node": "^17.0.31"
+    "@types/node": "^17.0.31",
+    "@types/node-schedule": "^2.1.0"
   }
 }

@@ -1,36 +1,75 @@
+import { Client, createClient } from 'oicq'
+import { config } from './config/config'
 import * as f from './function'
-import {_QQ, _settings, _platform } from './config/config'
-f.putlog('TD QQ机器人正在启动')
-if (_QQ.uin === 123456789 && _QQ.pwd === 'abcdefg' && _settings.masterId === 987654321) {
-    f.putlog('首次使用请在config文件夹的config.ts文件配置QQ号和密码')
-    process.exit(1001)
+
+import {Plugin_start} from './plugin/index'
+
+//start bot
+f.putlog(config.language.start_msg)
+//check if set
+if (config.qqconfig.length === 0) {
+	f.putlog(config.language.not_found_config)
+	process.exit(1001)
 }
-import {createClient, segment} from 'oicq'
-f.putlog('正在登录中awa...')
 
-export const client = createClient(_QQ.uin, {platform: _platform});
+f.putlog(config.language.logining)
 
-client.on('system.login.slider', function (data) {
-	process.stdin.once('data', (input) => {
-		this.submitSlider(String(input));
-	});
-}); 
-
-client.on('system.login.device', function (data) {
-	process.stdin.once('data', () => {
-		this.login();
-	});
-});
-
-setTimeout(function() {
-	client.login(_QQ.pwd);
-}, 1000);
-
-client.on("system.online", () => {
-    f.putlog('登录成功了，正在加载插件...')
-    
-    require('./plugin/admin')
+New_all_user_id().then(async client => {
+	for (let i = 0; i < config.qqconfig.length; i++) {
+		await login_client(client[i], config.qqconfig[i].pwd).then(res => {
+			if (res.success) f.putlog(`${config.language.logining}... ${i + 1}/${config.qqconfig.length}`)
+			Plugin_start(client[i])
+		}).catch(err => {
+			throw err
+		})
+	}
 })
+
+export function New_all_user_id(): Promise<Client[]> {
+	return new Promise((resolve) => {
+		let client: Client[] = []
+		for (let i = 0; i < config.qqconfig.length; i++) {
+			client[client.length] = createClient(config.qqconfig[i].uin, { platform: config.qqconfig[i].platform })
+			if (i == config.qqconfig.length - 1) resolve(client)
+		}
+	})
+}
+
+export function login_client(client: Client, pwd: string): Promise<Base_res> {
+	return new Promise((resolve, reject) => {
+		client.login(pwd)
+		client.on('system.online', data => {
+			resolve({
+				success : true
+			})
+		}).on('system.login.device', data => {
+			process.stdin.once('data', (input) => {
+				client.submitSlider(String(input))
+			})
+		}).on('system.login.error', data => {
+			reject(data)
+		}).on('system.login.device', session=>{
+        	console.log('请输入该账号绑定的手机号收到的验证码后回车继续：')
+        	client.sendSmsCode()
+        	process.stdin.once("data",(data)=>{
+            	client.submitSmsCode(data.toString())
+        	})
+    	})
+	})
+}
+
+interface Base_res {
+	success : boolean,
+	msg? : string
+}
+
+
+
+
+
+
+
+
 
 
 

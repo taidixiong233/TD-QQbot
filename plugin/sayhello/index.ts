@@ -1,7 +1,13 @@
-import {bot} from '../admin'
-import { log, error } from '../admin'
+import { log, error, Plugin_info } from '../index'
+import { Client } from 'oicq'
 
-export const config = {
+export const config : Plugin_info = {
+    start(client:Client):void {
+        setTimeout(() => {
+            log(`来自${this.author}的插件${this.name} 版本${this.version} 已加载完毕！`)
+            Setup(client)
+        }, 10)
+    },
     name : 'sayhello',
     author : 'taidixiong233',
     version : '1.0',
@@ -9,10 +15,11 @@ export const config = {
     start_filename : './sayhello/index.ts'
 }
 
-setTimeout(() => {
-    log('来自' + config.author + '的插件' + config.name + ' 版本' + config.version + '已加载完毕！')
-}, 1000);
 
-bot.on('message.group', e=> {
-    e.reply('你好呀')
-})
+
+function Setup(client:Client):void{
+    client.on('message.private', message => {
+    message.reply('Hello World!')
+    })
+}
+
