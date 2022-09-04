@@ -42,7 +42,7 @@ export function login_client(client: Client, pwd: string): Promise<Base_res> {
 			resolve({
 				success : true
 			})
-		}).on('system.login.device', data => {
+		}).on('system.login.slider', data => {
 			process.stdin.once('data', (input) => {
 				client.submitSlider(String(input))
 			})
