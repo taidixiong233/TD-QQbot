@@ -1,0 +1,22 @@
+{
+  "plugin": [
+    {
+      "name": "helloworld",
+      "author": "taidixiong233",
+      "version": "1.0",
+      "website": "maohaoji.com",
+      "start_filename": "./helloworld/index.ts",
+      "uuid": "ebfab24e-4e41-44f4-99d1-ccca34314b65",
+      "lib": []
+    },
+    {
+      "name": "TD-bot Plugin",
+      "author": "taidixiong233",
+      "version": "1.0",
+      "website": "maohaoji.com",
+      "start_filename": "./index.ts",
+      "uuid": "e807ac82-7765-4373-afec-1cbbd327dd73",
+      "lib": []
+    }
+  ]
+}
