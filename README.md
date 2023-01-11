@@ -14,7 +14,7 @@ npm i
 npm i ts-node -g
 ```
 3. 填写账号信息
-编辑 `./config.config.ts`文件填写你的账号密码
+编辑 `./config/config.ts`文件填写你的账号密码
 ```typescript
 qqconfig: [
 		 {
@@ -50,6 +50,7 @@ ts-node ./src/index.ts -nologin -pluginlist
 ts-node ./src/index.ts -pluginlist
 ```
 
+注意, 你可能需要自行补齐插件的库
 
 # 鸣谢
  [takayama-lily/oicq](https://github.com/takayama-lily/oicq) 底层服务支持
