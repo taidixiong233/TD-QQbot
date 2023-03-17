@@ -1,5 +1,5 @@
 import { log, Plugin_info } from '../index'
-import { Client } from 'oicq'
+import { Client } from 'icqq'
 
 export const config: Plugin_info = {
     start(client_map: Map<number, Client>): void {

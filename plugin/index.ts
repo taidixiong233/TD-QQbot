@@ -1,5 +1,5 @@
 import { putlog, puterror, use } from "../src/function"
-import { Client } from "oicq";
+import { Client } from "icqq";
 export const log = putlog;
 export const error = puterror;
 import * as fs from 'fs'

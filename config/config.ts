@@ -1,4 +1,4 @@
-import { Platform } from 'oicq'
+import { Platform } from 'icqq'
 import { msg_word_ZH_CN, Msg_word } from './language'
 
 

@@ -1,4 +1,4 @@
-import { Client, createClient } from 'oicq'
+import { Client, createClient } from 'icqq'
 import { config } from '../config/config'
 import * as f from './function'
 import * as fs from 'fs'
@@ -133,8 +133,8 @@ TD QQBot 插件列表
 
 	async function login(uin: number, password: string, platform: 1 | 2 | 3 | 4 | 5): Promise<void> {
 		return new Promise(res => {
-			let client = createClient(uin, { platform: platform })
-			client.login(password)
+			let client = createClient({ platform: platform })
+			client.login(uin, password)
 			client.on('system.online', () => {
 				if (!client_map.has(uin)) {
 					client_map.set(uin, client)
