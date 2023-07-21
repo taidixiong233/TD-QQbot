@@ -3,11 +3,14 @@ import { config } from '../config/config'
 import * as f from './function'
 import * as fs from 'fs'
 import * as path from 'path'
-
+import TDQQbot_Error from './error'
 import { Plugin_start } from '../plugin/index'
 import runtime from './runtime'
 import { Plugin_load } from '../plugin/index'
 import { new_plugin_json } from '../plugin'
+
+/**加载错误收集程序 */
+export const error = new TDQQbot_Error(path.join(__dirname, '../logs'));
 
 (async function () {
 	let settings = {
@@ -133,7 +136,7 @@ TD QQBot 插件列表
 
 	async function login(uin: number, password: string, platform: 1 | 2 | 3 | 4 | 5): Promise<void> {
 		return new Promise(res => {
-			let client = createClient({ platform: platform })
+			let client = createClient({ platform: platform,sign_api_addr: config.sign_server })
 			client.login(uin, password)
 			client.on('system.online', () => {
 				if (!client_map.has(uin)) {
