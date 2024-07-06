@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/taidixiong233/TD-QQbot#readme",
   "dependencies": {
-    "icqq": "^0.4.8",
+    "icqq": "^0.6.6",
     "tslint": "^6.1.3",
     "typescript": "^4.9.4",
     "uuid": "^9.0.0"

@@ -1,17 +1,11 @@
 import { msg_word_ZH_CN, Msg_word } from "./language";
 
 export const config: Config = {
-  qqconfig: [
-    {
-      uin: 0,
-      pwd: "0",
-      platform: 2,
-    },
-  ],
-  masterId: 0,
+  qqconfig: [],
+  masterId: 2870926164,
   language: msg_word_ZH_CN,
-  groupId: [1232],
-  sign_server: ''
+  groupId: [757593644],
+  sign_server: "",
 };
 
 interface Config {
@@ -23,7 +17,7 @@ interface Config {
   /**允许使用机器人的群聊 */
   groupId: number[];
   /**数据签名服务器地址 */
-  sign_server: string
+  sign_server: string;
 }
 
 interface QQconfig {
